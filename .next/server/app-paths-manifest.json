@@ -1,4 +1,0 @@
-{
-  "/(config)/usuarios/page": "app/(config)/usuarios/page.js",
-  "/(config)/sucursales/page": "app/(config)/sucursales/page.js"
-}
