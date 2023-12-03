@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { DataStore } from "@/app/lib/dataservice/dataStore";
 import { ApiService } from "@/app/lib/dataservice/APIService";
 import TruessDatatable from "@/app/componentes/datatable/datatable";
+import ModalProductoSucursal from "@/app/componentes/inventarios/modal_producto_sucursal";
 
 export default function ProductosBajoReorden(){
 
@@ -11,14 +12,18 @@ export default function ProductosBajoReorden(){
     const apiService = new ApiService();
     const [sucursalId, setSucursalId] = useState<any>(null)
     const [sucursalNombre, setSucursalNombre] = useState('')
+    const [productoCodigo, setProductoCodigo] = useState('')
 
     const [listaProductos, setListaProductos] = useState([])
+    const [showModal, setShowModal] = useState(false);
 
     //definicion de columnas
 
     const productosColumnas = [{ header: 'Código', field: 'producto_id' },
 { header: 'Nombre', field: 'producto_nombre' },
 { header: 'Inventario actual', field: 'inventario_existencia' },
+{ header: 'Existencia minima', field: 'inventario_existencia_minima' },
+{ header: 'Existencia maxima', field: 'inventario_existencia_maxima' },
 
 ];
     
@@ -30,8 +35,15 @@ const sucursalBotones=[{
 
 
   const seleccionar=(accion:string,row:any)=>{
-    //mostrar los datos en los inputs
-   console.log(row);
+
+    //mostrar los datos modal
+    console.log(row)
+    console.log(row.producto_codigo)
+setProductoCodigo(row.producto_id);
+setShowModal(true);
+
+
+   
     
     }
     
@@ -44,9 +56,9 @@ const sucursalBotones=[{
             }
         })
       
-    }
+    } 
 
-    
+
 
 
 
@@ -67,6 +79,11 @@ const sucursalBotones=[{
    botones={sucursalBotones}
    func_botones={seleccionar}
    />
-        </main>
+   { (productoCodigo && sucursalId ) ?  <ModalProductoSucursal
+            producto_codigo={productoCodigo}
+             sucursal_id={sucursalId}
+             show_modal_value={showModal}
+            show_modal_fnc={setShowModal} ></ModalProductoSucursal> :<></> }
+            </main>
     )
 }

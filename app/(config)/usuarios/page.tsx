@@ -45,8 +45,7 @@ const seleccionar=(accion:string,row:any)=>{
     setId(row.usuario_id);
     setNombre(row.usuario_nombre);
     setActivo(row.usuario_activo);
-    setRole(row.role_id);
-    
+    setRole(row.role_id);    
 }
     
     
@@ -187,7 +186,8 @@ const seleccionar=(accion:string,row:any)=>{
                 </div>
                 <div className="form-control">
                     <label className="cursor-pointer label">Role de usuario</label>
-                <select className="select select-bordered w-full" onChange={(e)=>setRole(Number(e.target.value))}>
+                <select className="select select-bordered w-full"
+                 onChange={(e)=>setRole(Number(e.target.value))}>
 
   {listaRoles.map((rol:any)=>{
         return <option value={rol.rol_id} id={rol.rol_id}>{rol.rol_nombre}</option>

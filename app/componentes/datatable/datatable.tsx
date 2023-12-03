@@ -56,7 +56,7 @@ export default function TruessDatatable({columnas,registros,botones, func_botone
                 name: 'Acciones',
                 cell: (row:any) => <div>
                     {botones.map((boton:any)=>{
-                        return <button className={`btn btn-${boton.color}`} onClick={()=>{func_botones(boton.accion,row)}}>{boton.texto}</button>
+                        return <button key={boton.accion} className={`btn btn-${boton.color}`} onClick={()=>{func_botones(boton.accion,row)}}>{boton.texto}</button>
                     })}
                 </div>,
                 ignoreRowClick: true,
