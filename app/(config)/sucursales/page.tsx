@@ -5,7 +5,6 @@ import { useState,useEffect } from "react";
 import { ApiService } from "@/app/lib/dataservice/APIService";
 import { EditDataTable } from "@/app/componentes/edit_datatable/edit_datatable";
 
-import DataTable, { TableColumn , createTheme} from 'react-data-table-component';
 import TruessDatatable from "@/app/componentes/datatable/datatable";
 import { Dialogo } from "@/app/lib/dialogs/dialogs";
 import PaginaTitulo from "@/app/componentes/pagina_titulo/paginaTitulo";

@@ -31,7 +31,7 @@ async CallAPI(method:string,url:string,payload:any)
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(payload)           
     }    
            
     }else{
@@ -55,15 +55,15 @@ async CallAPI(method:string,url:string,payload:any)
         return {'status': 200, 'response': await res.json() } ;
     } else {
         if (res.status === 500) {
-            console.log(res)
-            this.dialogoService.show_toast("Error en el proceso, favor contacto a su administrador"  ,           
+                 this.dialogoService.show_toast("Error en el proceso, favor contacto a su administrador"  ,           
             
             "ERROR");
             return {'status': res.status, 'response':await res.text()}
         }
-        this.dialogoService.show_toast("Operación no completada:" + res.text() ,   "INFO")        
+        const respuesta =  res.text()
+        this.dialogoService.show_toast("Operación no completada:" + respuesta,   "INFO")        
          
-        return {'status': res.status, 'response':await res.text()}
+        return {'status': res.status, 'response':respuesta}
         //throw new Error(await res.text());
     
 

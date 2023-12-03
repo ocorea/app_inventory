@@ -24,8 +24,7 @@ export default function RootLayout({
    
       <body className={inter.className}>
       <div style={{display:'flex', flexDirection:'column'}}>
-        <PageHeader/>
-    
+        <PageHeader/>    
         <ToastContainer/>
       {children}
      

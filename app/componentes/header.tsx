@@ -1,8 +1,27 @@
+
+"use client"
 import Link from "next/link"
 import { metadata } from "../layout"
-
+import { useState, useEffect } from 'react'
+import { DataStore } from '../lib/dataservice/dataStore';
 
 function PageHeader(){
+    const dataStore = new DataStore();
+    const [usuarioNombre, setUsuarioNombre] = useState('');
+
+
+    const close_session = ()=>{
+        dataStore.clear();
+        window.location.href = "/login";
+    
+    }
+
+    useEffect(() => {
+     setUsuarioNombre(dataStore.get('nombre') as string)
+    }, [])
+    
+
+  
     return (
       <>
               <div className="navbar bg-base-100">
@@ -41,7 +60,9 @@ function PageHeader(){
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+    <a onClick={()=>{
+      close_session()
+    }} className="btn">Hola, {usuarioNombre}</a>
   </div>
 </div>
 
