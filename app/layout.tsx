@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import PageHeader from './componentes/header'
+
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import PathGuard from './lib/pathguard/pathGuard'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,17 +21,26 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-     
+   
    
       <body className={inter.className}>
-      <div style={{display:'flex', flexDirection:'column'}}>
-        <PageHeader/>    
+        <h1>Prueba encabezado</h1>
+    
+ 
+      <div style={{display:'flex', flexDirection:'column'}}>     
         <ToastContainer/>
-      {children}
-     
+
+ <PathGuard>
+ {children}
+ </PathGuard>
+
+  
       
       </div>
+  
         </body>
+    
+     
 
 
 

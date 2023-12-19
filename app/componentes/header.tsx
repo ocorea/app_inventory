@@ -1,7 +1,7 @@
 
 "use client"
 import Link from "next/link"
-import { metadata } from "../layout"
+import { metadata } from "../inventario/layout"
 import { useState, useEffect } from 'react'
 import { DataStore } from '../lib/dataservice/dataStore';
 

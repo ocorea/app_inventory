@@ -20,6 +20,17 @@ export class ApiService{
     private dialogoService = new Dialogo();
 
 
+async GetPDF(url:string){
+    const res = await fetch(url);
+    const blob = await res.blob();
+    const file = new File([blob], "filename.pdf", { type: "application/pdf" });
+    console.log('ARCHIVO: ',file)
+    const url2 = window.URL.createObjectURL(blob)
+    console.log('URL: ',url2)
+    return file;
+
+}
+
 
 async CallAPI(method:string,url:string,payload:any) 
  {
@@ -31,12 +42,14 @@ async CallAPI(method:string,url:string,payload:any)
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(payload)           
+            body:  JSON.stringify(payload),
+                      
     }    
            
     }else{
         parameters={
             method: method,
+            
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -46,6 +59,7 @@ async CallAPI(method:string,url:string,payload:any)
     
   
 
+    console.log(this.url_base + url,parameters );
     const res = await fetch(this.url_base + url,parameters );
 
   

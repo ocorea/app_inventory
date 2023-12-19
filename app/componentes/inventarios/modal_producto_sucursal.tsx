@@ -67,9 +67,11 @@ export default function ModalProductoSucursal({producto_codigo,sucursal_id,show_
             producto_codigo:producto_codigo,
             existencia_minima:punto_reorden_min,
             existencia_maxima:punto_reorden_max}).then((res:any)=>{
+             
             if(res.status === 200){
-                dialogoService.show_toast('success','Punto de reorden actualizado correctamente');
-                show_modal_fnc(false);
+                show_modal_fnc();
+                dialogoService.show_toast('Punto de reorden actualizado correctamente','SUCCESS');
+            
             }
         })
     }
@@ -87,7 +89,7 @@ export default function ModalProductoSucursal({producto_codigo,sucursal_id,show_
 
 
     return (
-        <div >
+        <dialog>
         <Modal isOpen={show_modal_value}
         ariaHideApp={false}
         style={{
@@ -177,7 +179,7 @@ export default function ModalProductoSucursal({producto_codigo,sucursal_id,show_
 </form>
            
 </Modal>
-        </div>
+        </dialog>
 
 
 

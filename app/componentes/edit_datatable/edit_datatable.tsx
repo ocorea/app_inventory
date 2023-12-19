@@ -20,11 +20,13 @@ import {
       setValue(initialValue)
     }, [initialValue])
     const onBlur = () => {
+  
       table.options.meta?.updateData(row.index, column.id, value)
     }
 
     const onSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
       setValue(e.target.value)
+      console.log('Evento cambio: ', e.target.value)
       tableMeta?.updateData(row.index, column.id, e.target.value)
     }
 
@@ -84,41 +86,6 @@ import {
 
   const columnHelper = createColumnHelper<any>();
 
-  const columns = [
-    columnHelper.accessor("studentId", {
-      header: "Student ID",
-      cell: TableCell,
-      meta:{
-        type: "number"
-      }
-    }),
-    columnHelper.accessor("name", {
-      header: "Full Name",
-      cell: TableCell,
-      meta:{
-        type: "text"
-      }
-    }),
-    columnHelper.accessor("dateOfBirth", {
-      header: "Date Of Birth",
-      cell: TableCell,
-      meta:{
-        type: "date"
-      }
-    }),
-    columnHelper.accessor("major", {
-      header: "Major",
-      cell: TableCell,
-      meta:{
-        type: "text"
-      }
-    }),
-
-  ];
-
-
-
-
   export const EditDataTable = ({records, columns_definition,selected_record}) => {
     const [data, setData] = useState(() => [...records]);
     const [editedRows, setEditedRows] = useState({});
@@ -138,6 +105,13 @@ import {
 
      });
 
+     //console.log('COLUMNAS ARRAY: ',columns_array, ' PARTE FIJA:', columns)
+
+
+
+     const columns = columns_array
+
+     
      
 
     const table = useReactTable({
@@ -148,6 +122,7 @@ import {
         editedRows,
       setEditedRows,
         updateData: (rowIndex: number, columnId: string, value: string) => {
+          
           setData((old) =>
             old.map((row, index) => {
               if (index === rowIndex) {
@@ -155,7 +130,9 @@ import {
                   ...old[rowIndex],
                   [columnId]: value,
                 };
+                      
               }
+              //console.log('ROW: ',row)
               return row;
             })
           );
@@ -165,8 +142,10 @@ import {
 
 
     useEffect(() => {
-      selected_record(editedRows)
-    }, [editedRows])
+      //console.log('EDITED ROWS: ',table.getState())
+      //console.log('TABLE: ',table.getRowModel().rows)
+      selected_record(table.getRowModel().rows)
+      }, [table.getRowModel().rows])
 
     return (
       <table>

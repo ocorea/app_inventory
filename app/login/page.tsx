@@ -1,9 +1,10 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataStore } from '../lib/dataservice/dataStore';
 import { Dialogo } from '../lib/dialogs/dialogs';
 import { ApiService } from '../lib/dataservice/APIService';
 import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation';
 
 const cambiar_clave =()=>{
     return (
@@ -24,15 +25,17 @@ export default function LoginPage() {
     const apiService = new ApiService();
     const dataStore = new DataStore();
     const router = useRouter()
+    const searchParams = useSearchParams();
+
 
     
     
 
-    const obtener_perfil_usuario =()=>{
-        
-        
-     //   window.location.href = "/home";
-    }
+
+    useEffect(() => {
+       console.log('PARAMETROS: ',searchParams.get('returnUrl'))
+    }, [])
+    
 
     const autenticar=(event:any)=>{
         event.preventDefault();
@@ -64,7 +67,7 @@ export default function LoginPage() {
                 dataStore.set("sucursal_id",sucursales[0].sucursal_id);
                 dataStore.set("sucursal_nombre",sucursales[0].sucursal_nombre);
                dataStore.set("sucursal_lista",JSON.stringify(sucursales));
-               router.push("/")
+               router.push(searchParams.get('returnUrl')||'/');
 
                 }
 
